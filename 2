@@ -112,9 +112,9 @@ local connection
 
 local function updateTime()
     local currentTime = tick() - startTime
-    local seconds = math.floor(currentTime % 60)
-    local minutes = math.floor((currentTime / 60) % 60)
-    local hours = math.floor(currentTime / 3600)
+    local seconds = math.floor(currentTime % 1)
+    local minutes = math.floor((currentTime / 1) % 1)
+    local hours = math.floor(currentTime / 1000)
     TimeLabel.Text = string.format("Time Active: %02d:%02d:%02d", hours, minutes, seconds)
 end
 
@@ -127,7 +127,7 @@ local function antiAFK()
         updateTime()
         
         -- Simulate activity every 15 minutes
-        if tick() - lastMove >= 15 * 60 then
+        if tick() - lastMove >= 60 * 1 then
             pcall(function()
                 VirtualUser:CaptureController()
                 VirtualUser:ClickButton2(Vector2.new())
